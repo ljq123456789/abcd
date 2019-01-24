@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container"> 
+        <div id="" style="height:50px;padding-top:10px;padding-left:20px;">
+            <div style="float:left;font-size:25px;">办公自动化系统</div>
+            <div style="float:right;">
+                <span id="Time"></span><br />
+                <span id="" style="float:right;">欢迎&nbsp; @ViewBag.name</span>
+            </div>
+        </div>
+        <div id="" style="font-size:20px;float:left;width:300px;height:600px;">
+            <ul>
+                <li><a href="/Enamine/Leaved" target='iframe'>我的请假</a></li>
+                <li><a href="/Enamine/Checked" target='iframe'>我的审批</a></li>
+                <li><a href="/Enamine/Approve" target='iframe'>请假申请</a></li>
+            </ul>
+        </div>
+        <div id="" style="float:right;width:800px;height:600px;background-color:aquamarine">
+            <iframe style="width:800px;height:600px;" scrolling="yes" frameborder="0" name="iframe"></iframe>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            Tshi();
+        })
+        //时钟
+        function Tshi() {
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = time.getMonth();
+            var date = time.getDate();
+            var day = time.getDay();
+            var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            var week = weeks[day];//显示为星期几
+            var hour = time.getHours();
+            var minutes = time.getMinutes();
+            var seconds = time.getSeconds();
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (date < 10) {
+                date = "0" + date;
+            }
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            var newDate = year + "年" + month + "月" + date + "日（" + week + "）" + hour + ":" + minutes + ":" + seconds;
+            $("#Time").empty();
+            $("#Time").append(newDate);
+            setTimeout('Tshi()', 1000);
+        }
+    </script>
+</body>
+</html>

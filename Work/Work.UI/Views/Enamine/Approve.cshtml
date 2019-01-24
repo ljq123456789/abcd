@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Approve</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+    <div>
+        <form id="fomr1" method="post" enctype="multipart/form-data">
+            <table class="table">
+                <tr>
+                    <td>姓名</td>
+                    <td><span id="name">@ViewBag.name</span></td>
+                    <td>部门</td>
+                    <td><span id="depart">@ViewBag.dapart</span></td>
+                </tr>
+                <tr>
+                    <td>请假开始时间</td>
+                    <td><input type="text" onclick="WdatePicker()" id="start" /></td>
+                    <td>共计</td>
+                    <td><input type="text" id="sum" /></td>
+                </tr>
+                <tr>
+                    <td>请假结束时间</td>
+                    <td><input type="text" onclick="WdatePicker()" id="end" /></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>请假事由</td>
+                    <td><input type="radio" name="reson" value="事假" />事假&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="reson" value="公假" />公假</td>
+                    <td><input type="radio" name="reson" value="病假" />病假</td>
+                    <td><input type="radio" name="reson" value="婚假" />婚假</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="radio" name="reson" value="丧假" />丧假&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="reson" value="产假" />产假</td>
+                    <td><input type="radio" name="reson" value="工伤假" />工伤假</td>
+                    <td><input type="radio" name="reson" value="其他" />其他</td>
+                </tr>
+                <tr>
+                    <td>证明图片</td>
+                    <td>
+                        <input type="file" id="files" name="files" multiple value="" hidden />
+                    </td>
+                    <td><div id="showimg"></div></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>备注说明:</td>
+                    <td><input type="text" placeholder="请备注说明30字以内" id="market" /></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="保存" onclick="Shang()" /></td>
+                    <td><input type="submit" value="保存并提交" onclick="Shang()" /></td>
+                    <td><input type="submit" value="放弃" onclick="" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $("#files").change(function () {
+                var oFile = document.querySelector("#files");//获取该标签所有文件
+                for (var i = 0; i < oFile.files.length; i++) {
+                    var src = URL.createObjectURL(oFile.files[i])//单个文件地址
+                    $("#showimg").append("<img class='imgname' style='width:60px;height:60px;margin-left:10px' src='" + src + "' alt='Alternate Text' onclick='DelImg(this)'/>");
+                }
+            })
+        })
+        function DelImg(obj) {
+            $(obj).remove();
+        } 
+        function Shang() {
+            var formdata = new FormData($("#fomr1")[0]);
+            $.ajax({
+                url: "/Enamine/Adds",
+                data: formdata,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: "post",
+                success: function (data) {
+                    if (data > 0) {
+                        alert("添加成功");
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

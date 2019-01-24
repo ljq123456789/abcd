@@ -1,0 +1,7 @@
+E:\技能\月考\Work\Work.Factory\bin\Debug\Work.Factory.dll
+E:\技能\月考\Work\Work.Factory\bin\Debug\Work.Factory.pdb
+E:\技能\月考\Work\Work.Factory\bin\Debug\Work.IDAL.dll
+E:\技能\月考\Work\Work.Factory\bin\Debug\Work.IDAL.pdb
+E:\技能\月考\Work\Work.Factory\obj\Debug\Work.Factory.csprojResolveAssemblyReference.cache
+E:\技能\月考\Work\Work.Factory\obj\Debug\Work.Factory.dll
+E:\技能\月考\Work\Work.Factory\obj\Debug\Work.Factory.pdb

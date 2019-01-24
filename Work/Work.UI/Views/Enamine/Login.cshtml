@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container"> 
+        <table class="table">
+            <tr>
+                <td>工号:</td>
+                <td><input type="text" id="wid" /></td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td><input type="password" id="pwid" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="登录" onclick="Login()" /></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function Login() {
+            $.ajax({
+                url: "/Enamine/Logins",
+                data: { Wid: $("#wid").val(), Pwid: $("#pwid").val() },
+                type: "get",
+                success: function (data) {
+                    if (data > 0) {
+                        location.href = "/Enamine/Index";
+                    } else {
+                        alert('用户名或密码错误');
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

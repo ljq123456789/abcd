@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Leaved</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+    <div>
+        状态:
+        <select id="statio">
+            <option value="">请选择</option>
+            <option value="0">未提交</option>
+            <option value="1">待审核</option>
+            <option value="2">已通过</option>
+            <option value="3">已驳回</option>
+        </select>
+        &nbsp;&nbsp;
+        开始时间：<input type="text" onclick="WdatePicker()" id="start" />&nbsp;&nbsp;
+        结束时间：<input type="text" onclick="WdatePicker()" id="end" />&nbsp;&nbsp;
+        <input type="hidden" value="@ViewBag.id" id="uid" />
+        <input type="button" value="查询" onclick="Show()" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>状态</td>
+                    <td>部门</td>
+                    <td>工号</td>
+                    <td>姓名</td>
+                    <td>申请时间</td>
+                    <td>审核时间</td>
+                    <td>说明</td>
+                </tr>
+            </thead>
+            <tbody id="Show">
+                
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(function () {
+            Show();
+        })
+        function Show() {
+            var o = { statio: $("#statio").val(), start: $("#start").val(), end: $("#end").val(), uid: $("#uid").val() }
+            $.ajax({
+                url: "/Enamine/Leaveds",
+                data: o,
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    $("#Show").empty();
+                    var strhtml = "";
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].Statio == 0) {
+                            strhtml += "<tr><td>未提交</td><td>" + data[i].Depart + "</td><td>" + data[i].WId + "</td><td>" + data[i].Name + "</td><td>" + data[i].Qing + "</td><td>" + data[i].Shen + "</td><td>" + data[i].Bo + "</td></tr>";
+                        } else if (data[i].Statio == 1 || data[i].Statio == 2) {
+                            strhtml += "<tr><td>待审核</td><td>" + data[i].Depart + "</td><td>" + data[i].WId + "</td><td>" + data[i].Name + "</td><td>" + data[i].Qing + "</td><td>" + data[i].Shen + "</td><td>" + data[i].Bo + "</td></tr>";
+                        }else if(data[i].Statio==3){
+                            strhtml += "<tr><td>已通过</td><td>" + data[i].Depart + "</td><td>" + data[i].WId + "</td><td>" + data[i].Name + "</td><td>" + data[i].Qing + "</td><td>" + data[i].Shen + "</td><td>" + data[i].Bo + "</td></tr>";
+                        }else if(data[i].Statio==4){
+                            strhtml += "<tr><td style='background-color:darkgrey'>已驳回</td><td>" + data[i].Depart + "</td><td>" + data[i].WId + "</td><td>" + data[i].Name + "</td><td>" + data[i].Qing + "</td><td>" + data[i].Shen + "</td><td>" + data[i].Bo + "</td></tr>";
+                        }
+                    }
+                    $("#Show").append(strhtml);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

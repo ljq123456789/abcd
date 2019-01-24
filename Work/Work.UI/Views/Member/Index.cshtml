@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            Show();
+        })
+        function Show() {
+            $.ajax({
+                url: "/Member/Show",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#Show").empty();
+                    var strhtml = "";
+                    for (var i = 0; i < data.length; i++) {
+                        strhtml += "<tr><td>" + data[i].Id + "</td><td>" + data[i].Name + "</td><td>"
+                            + data[i].Sex + "</td><td>" + data[i].Deadline + "</td><td>" + data[i].Create + "</td></tr>"
+                    }
+                    $("#Show").append(strhtml);
+                }
+            })
+        }
+        function Ru() {
+            $.ajax({
+                url: "/Member/Upload",
+                type: "post",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: new FormData($("#form1")[0]),
+                dataType: "text",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('上传与导入成功');
+                    } else {
+                        alert('上传与导入失败');
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="table">
+        <form id="form1">
+            <input type="file" name="files" />
+            <input type="submit" value="上传并导入" onclick="Ru()" />
+        </form>
+        <input type="button" value="导出" onclick="javaScript:location.href='/Member/Chu'" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>使用期限</td>
+                    <td>开通日期</td>
+                </tr>
+            </thead>
+            <tbody id="Show"></tbody>
+        </table>
+    </div>
+</body>
+</html>

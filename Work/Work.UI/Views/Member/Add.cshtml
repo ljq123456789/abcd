@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+@using Work.UI.Controllers
+@model List<Item>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+    <div class="container"> 
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" id="name" /></td>
+            </tr>
+            <tr>
+                <td>使用期限</td>
+                <td>
+                    @foreach(Item i in Model)
+                    {
+                        if(i.Type== "Deadline")
+                        {
+                            <input type="radio" name="ddd" value="@i.Name" />@i.Name
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>
+                    @foreach (Item i in Model)
+                    {
+                        if (i.Type == "Sex")
+                        {
+                            <input type="radio" name="sss" value="@i.Name" />@i.Name
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>开通日期</td>
+                <td><input type="text" id="time" onclick="WdatePicker()"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="确定" onclick="" /></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

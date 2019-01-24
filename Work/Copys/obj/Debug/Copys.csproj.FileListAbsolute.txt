@@ -1,0 +1,6 @@
+E:\技能\月考\Work\Copys\bin\Debug\Copys.exe.config
+E:\技能\月考\Work\Copys\bin\Debug\Copys.exe
+E:\技能\月考\Work\Copys\bin\Debug\Copys.pdb
+E:\技能\月考\Work\Copys\obj\Debug\Copys.csprojResolveAssemblyReference.cache
+E:\技能\月考\Work\Copys\obj\Debug\Copys.exe
+E:\技能\月考\Work\Copys\obj\Debug\Copys.pdb
